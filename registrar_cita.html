@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registrar cita | MediTurno</title>
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="registrar-cita.js" defer></script>
+</head>
+
+<body class="registro-page">
+
+    <!-- Encabezado -->
+    <header class="registro-header">
+        <a href="index.html" class="registro-brand">
+            <span class="registro-brand-icon">✚</span>
+            <span>Essência Saúde </span>
+        </a>
+
+        <nav class="registro-nav">
+            <a href="index.html">Inicio</a>
+            <a href="index.html">Especialidades</a>
+            <a href="registrar-cita.html" class="nav-active">Reservar</a>
+            <a href="index.html">Contacto</a>
+        </nav>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="registro-container">
+
+        <section class="registro-form-section">
+            <h1>Ingresa tus datos personales</h1>
+
+            <p class="registro-description">
+                Completa la información para registrar tu cita médica.
+            </p>
+
+            <form id="form-cita" class="registro-form">
+
+                <div class="form-field">
+                    <label for="paciente">Nombre del paciente</label>
+                    <input id="paciente" name="paciente" type="text" placeholder="Ingresa el nombre del paciente"
+                        required>
+                </div>
+
+                <div class="form-field">
+                    <label for="medico">Especialidad</label>
+                    <input id="medico" name="medico" type="text" placeholder="Ingresa el nombre del médico" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="especialidad">Medico</label>
+                    <input id="especialidad" name="especialidad" type="text" placeholder="Ingresa la especialidad"
+                        required>
+                </div>
+
+                <div class="form-field">
+                    <label for="fecha">Fecha de la cita</label>
+                    <input id="fecha" name="fecha" type="date" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="hora">Hora de la cita</label>
+                    <input id="hora" name="hora" type="time" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="registro-button">
+                        Registrar cita
+                    </button>
+                    <button type="submit" class="registro-button">
+                        Cancelar  cita
+                    </button>
+                    <a href="index.html" class="registro-back">
+                        Volver al panel
+                    </a>
+                </div>
+
+                <p id="mensaje-formulario" class="registro-message" role="status" aria-live="polite" hidden>
+                </p>
+
+            </form>
+        </section>
+
+        <!-- Imagen de marca -->
+
+        <aside class="registro-image-section">
+            <div class="registro-logo">
+                <img class="registro-logo-image" src="imagnes integrador/logo.png" alt="Logotipo de MediTurno">
+            </div>
+        </aside>
+
+
+    </main>
+
+</body>
+
+</html>

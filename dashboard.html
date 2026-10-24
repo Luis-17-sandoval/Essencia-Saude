@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediTurno | Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">✚</div>
+            <div>
+                <h2>MediTurno</h2>
+                <small>Gestión de citas médicas</small>
+            </div>
+        </div>
+
+        <nav class="menu">
+            <button class="menu-item active" data-page="Inicio">▦ <span>Inicio</span></button>
+            <button class="menu-item" data-page="Pacientes">♙ <span>Pacientes</span></button>
+            <button class="menu-item" data-page="Médicos">⚕ <span>Médicos</span></button>
+            <button class="menu-item" data-page="Especialidades">✚ <span>Especialidades</span></button>
+            <button class="menu-item" data-page="Citas">▣ <span>Citas</span></button>
+            <button class="menu-item" data-page="Horarios">◷ <span>Horarios</span></button>
+            <button class="menu-item" data-page="Reportes">▤ <span>Reportes</span></button>
+            <button class="menu-item" data-page="Configuración">⚙ <span>Configuración</span></button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="avatar">A</div>
+            <div>
+                <strong>Administrador</strong>
+                <small>MediTurno</small>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="topbar">
+            <button id="menu-toggle" class="mobile-menu" aria-label="Abrir menú">☰</button>
+            <input id="search" class="search"
+                   type="search" placeholder="Buscar paciente, médico o cita...">
+            <div class="admin-badge">
+                <span class="status-dot"></span>
+                Panel administrativo
+            </div>
+        </header>
+
+        <section class="content">
+            <div class="welcome">
+                <div>
+                    <p class="eyebrow">PANEL DE CONTROL</p>
+                    <h1 id="page-title">¡Hola, administrador!</h1>
+                    <a href="registrar-cita.html">Registrar cita +</a>
+                    <p class="muted">Bienvenido a MediTurno. Aquí tienes el resumen de la clínica.</p>
+                </div>
+                <div class="date-box">
+                    <span>📅</span>
+                    <span id="current-date"></span>
+                </div>
+            </div>
+
+            <div id="notice" class="notice" hidden></div>
+
+            <section class="stats">
+                <article class="stat-card blue">
+                    <div class="stat-icon">♙</div>
+                    <div>
+                        <p>Pacientes registrados</p>
+                        <h2 id="total-patients">128</h2>
+                        <small>Usuarios de demostración</small>
+                    </div>
+                </article>
+
+                <article class="stat-card green">
+                    <div class="stat-icon">⚕</div>
+                    <div>
+                        <p>Médicos registrados</p>
+                        <h2 id="total-doctors">18</h2>
+                        <small>Personal de demostración</small>
+                    </div>
+                </article>
+
+                <article class="stat-card purple">
+                    <div class="stat-icon">▣</div>
+                    <div>
+                        <p>Citas de hoy</p>
+                        <h2 id="total-appointments">24</h2>
+                        <small>Agenda de demostración</small>
+                    </div>
+                </article>
+
+                <article class="stat-card orange">
+                    <div class="stat-icon">◷</div>
+                    <div>
+                        <p>Pendientes</p>
+                        <h2 id="total-pending">5</h2>
+                        <small>Por confirmar</small>
+                    </div>
+                </article>
+            </section>
+
+            <section class="dashboard-grid">
+                <article class="panel chart-panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Citas por especialidad</h3>
+                            <p class="muted">Distribución de ejemplo</p>
+                        </div>
+                        <span class="tag">Esta semana</span>
+                    </div>
+
+                    <div id="chart" class="chart"></div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel-heading">
+                        <div>
+                            <h3>Resumen de citas</h3>
+                            <p class="muted">Estado de la agenda</p>
+                        </div>
+                    </div>
+
+                    <div class="summary-row">
+                        <span class="summary-dot confirmed"></span>
+                        <span>Confirmadas</span>
+                        <strong id="confirmed-count">15</strong>
+                    </div>
+                    <div class="progress"><span style="width:62.5%"></span></div>
+
+                    <div class="summary-row">
+                        <span class="summary-dot pending"></span>
+                        <span>Pendientes</span>
+                        <strong id="pending-count">5</strong>
+                    </div>
+                    <div class="progress"><span class="yellow-bar" style="width:20.83%"></span></div>
+
+                    <div class="summary-row">
+                        <span class="summary-dot cancelled"></span>
+                        <span>Canceladas</span>
+                        <strong id="cancelled-count">4</strong>
+                    </div>
+                    <div class="progress"><span class="red-bar" style="width:16.67%"></span></div>
+
+                    <div class="info-box">
+                        <strong>Organiza tu agenda</strong>
+                        <p>Consulta las citas y verifica la disponibilidad de los médicos.</p>
+                        <button class="primary-button" data-page="Citas">Ver citas</button>
+                    </div>
+                </article>
+            </section>
+
+            <section class="panel appointments-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Próximas citas</h3>
+                        <p class="muted">Agenda de demostración</p>
+                    </div>
+                    <button class="text-button" data-page="Citas">Ver todas →</button>
+                </div>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Paciente</th>
+                                <th>Médico</th>
+                                <th>Especialidad</th>
+                                <th>Fecha y hora</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointments-body"></tbody>
+                    </table>
+                </div>
+                <p id="empty-message" class="empty-message" hidden>No se encontraron citas.</p>
+            </section>
+
+            <footer>
+                MediTurno · Sistema de Gestión de Citas Médicas
+                <span>Versión inicial de demostración</span>
+            </footer>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
