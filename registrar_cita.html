@@ -23,7 +23,7 @@
         <nav class="registro-nav">
             <a href="index.html">Inicio</a>
             <a href="index.html">Especialidades</a>
-            <a href="registrar-cita.html" class="nav-active">Reservar</a>
+            <a href="registrar_cita.html" class="nav-active">Reservar</a>
             <a href="index.html">Contacto</a>
         </nav>
     </header>
@@ -40,39 +40,40 @@
 
             <form id="form-cita" class="registro-form">
 
+                <p id="usuario-conectado" class="registro-description"></p>
+
                 <div class="form-field">
-                    <label for="paciente">Nombre del paciente</label>
-                    <input id="paciente" name="paciente" type="text" placeholder="Ingresa el nombre del paciente"
-                        required>
+                    <label for="especialidad">Especialidad</label>
+                    <select id="especialidad" name="especialidad" required>
+                        <option value="">Cargando especialidades...</option>
+                    </select>
                 </div>
 
                 <div class="form-field">
-                    <label for="medico">Especialidad</label>
-                    <input id="medico" name="medico" type="text" placeholder="Ingresa el nombre del médico" required>
+                    <label for="medico">Médico</label>
+                    <select id="medico" name="medico" required disabled>
+                        <option value="">Primero selecciona una especialidad</option>
+                    </select>
                 </div>
 
                 <div class="form-field">
-                    <label for="especialidad">Medico</label>
-                    <input id="especialidad" name="especialidad" type="text" placeholder="Ingresa la especialidad"
-                        required>
+                    <label for="horario">Fecha y hora disponible</label>
+                    <select id="horario" name="horario" required disabled>
+                        <option value="">Primero selecciona un médico</option>
+                    </select>
                 </div>
 
                 <div class="form-field">
-                    <label for="fecha">Fecha de la cita</label>
-                    <input id="fecha" name="fecha" type="date" required>
-                </div>
-
-                <div class="form-field">
-                    <label for="hora">Hora de la cita</label>
-                    <input id="hora" name="hora" type="time" required>
+                    <label for="motivo">Motivo de la consulta (opcional)</label>
+                    <textarea id="motivo" name="motivo" maxlength="500" rows="3" placeholder="Describe brevemente el motivo"></textarea>
                 </div>
 
                 <div class="form-actions">
                     <button type="submit" class="registro-button">
                         Registrar cita
                     </button>
-                    <button type="submit" class="registro-button">
-                        Cancelar  cita
+                    <button type="reset" class="registro-button" id="limpiar-formulario">
+                        Limpiar formulario
                     </button>
                     <a href="index.html" class="registro-back">
                         Volver al panel

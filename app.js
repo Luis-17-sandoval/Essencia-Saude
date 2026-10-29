@@ -12,6 +12,27 @@ const specialties = [
 
 const $ = (selector) => document.querySelector(selector);
 
+function normalizarEstado(estado) {
+    if (!estado) return "Pendiente";
+
+    const valor = String(estado)
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+
+    const estados = {
+        pendiente: "Pendiente",
+        confirmada: "Confirmada",
+        confirmado: "Confirmada",
+        cancelada: "Cancelada",
+        cancelado: "Cancelada"
+    };
+
+    return estados[valor] || "Pendiente";
+}
+
+
 function showDate() {
     const now = new Date();
 
@@ -35,7 +56,7 @@ function renderChart() {
 
         const bar = document.createElement("div");
         bar.className = "bar";
-        bar.style.height = `${(item.value / maxValue) * 76}%`;
+        bar.style.height = `${Math.max(4, (item.value / maxValue) * 76)}%`;
         bar.title = `${item.name}: ${item.value} citas`;
 
         const value = document.createElement("span");
@@ -147,29 +168,27 @@ function renderAppointments(searchText = "") {
 }
 
 
-function cancelAppointment(id) {
+async function cancelAppointment(id) {
     const appointment = appointments.find(a => a.id === id);
+    if (!appointment || appointment.status === "Cancelada") return;
 
-    if (!appointment || appointment.status === "Cancelada") {
-        return;
+    const accepted = confirm(`¿Deseas cancelar la cita de ${appointment.patient}?`);
+    if (!accepted) return;
+
+    try {
+        const respuesta = await fetch(`${API_CITAS}/${id}/cancelar`, { method: "PATCH" });
+        const resultado = await respuesta.json().catch(() => ({}));
+        if (!respuesta.ok) throw new Error(resultado.message || `Error HTTP ${respuesta.status}`);
+        await cargarCitasDesdeBackend();
+        const notice = $("#notice");
+        notice.textContent = "La cita se canceló correctamente y el horario volvió a estar disponible.";
+        notice.hidden = false;
+    } catch (error) {
+        console.error("Error al cancelar la cita:", error);
+        const notice = $("#notice");
+        notice.textContent = "No se pudo cancelar la cita en la base de datos. Verifica la conexión.";
+        notice.hidden = false;
     }
-
-    const accepted = confirm(
-        `¿Deseas cancelar la cita de ${appointment.patient}?`
-    );
-
-    if (!accepted) {
-        return;
-    }
-
-    appointment.status = "Cancelada";
-
-    updateStatistics();
-    renderAppointments($("#search").value);
-
-    const notice = $("#notice");
-    notice.textContent = "La cita de demostración se ha cancelado correctamente.";
-    notice.hidden = false;
 }
 
 function setupNavigation() {
@@ -236,8 +255,8 @@ async function cargarCitasDesdeBackend() {
             doctor: cita.medico,
             specialty: cita.especialidad,
             date: cita.fecha,
-            time: String(cita.hora).slice(0, 5),
-            status: cita.estado
+            time: String(cita.hora ?? "").slice(0, 5),
+            status: normalizarEstado(cita.estado)
         }));
 
         updateStatistics();

@@ -1,4 +1,6 @@
 
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -22,28 +24,91 @@
     </a>
 
     <main class="form-card">
+
         <header class="form-header">
             <h1>Crear una cuenta</h1>
             <p>
-                Regístrate en MediTurno para poder reservar tus citas médicas.
+                Regístrate en MediTurno para reservar tus citas médicas.
             </p>
         </header>
 
         <form id="form-registro" novalidate>
+
+            <!-- Nombre -->
             <div class="form-group">
-                <label for="nombre">Nombres y apellidos</label>
+                <label for="nombre">Nombre</label>
                 <input
                     type="text"
                     id="nombre"
                     name="nombre"
-                    autocomplete="name"
-                    minlength="3"
-                    maxlength="100"
+                    autocomplete="given-name"
+                    minlength="2"
+                    maxlength="60"
                     required
-                    placeholder="Ingresa tus nombres y apellidos"
+                    placeholder="Ingresa tu nombre"
                 >
             </div>
 
+            <!-- Apellido paterno -->
+            <div class="form-group">
+                <label for="apellidoPaterno">Apellido paterno</label>
+                <input
+                    type="text"
+                    id="apellidoPaterno"
+                    name="apellidoPaterno"
+                    autocomplete="family-name"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                    placeholder="Ingresa tu apellido paterno"
+                >
+            </div>
+
+            <!-- Apellido materno -->
+            <div class="form-group">
+                <label for="apellidoMaterno">Apellido materno</label>
+                <input
+                    type="text"
+                    id="apellidoMaterno"
+                    name="apellidoMaterno"
+                    minlength="2"
+                    maxlength="60"
+                    required
+                    placeholder="Ingresa tu apellido materno"
+                >
+            </div>
+
+            <!-- Fecha de nacimiento -->
+            <div class="form-group">
+                <label for="fechaNacimiento">Fecha de nacimiento</label>
+                <input
+                    type="date"
+                    id="fechaNacimiento"
+                    name="fechaNacimiento"
+                    autocomplete="bday"
+                    required
+                >
+            </div>
+
+            <!-- Género -->
+            <div class="form-group">
+                <label for="genero">Género</label>
+                <select
+                    id="genero"
+                    name="genero"
+                    required
+                >
+                    <option value="">Selecciona una opción</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                    <option value="Otro">Otro</option>
+                    <option value="Prefiero no decir">
+                        Prefiero no decir
+                    </option>
+                </select>
+            </div>
+
+            <!-- Correo electrónico -->
             <div class="form-group">
                 <label for="correo">Correo electrónico</label>
                 <input
@@ -57,18 +122,21 @@
                 >
             </div>
 
+            <!-- Celular -->
             <div class="form-group">
-                <label for="telefono">Teléfono (opcional)</label>
+                <label for="celular">Celular</label>
                 <input
                     type="tel"
-                    id="telefono"
-                    name="telefono"
+                    id="celular"
+                    name="celular"
                     autocomplete="tel"
                     maxlength="20"
-                    placeholder="Tu número de contacto"
+                    required
+                    placeholder="Ingresa tu número de celular"
                 >
             </div>
 
+            <!-- Contraseña -->
             <div class="form-group">
                 <label for="contrasena">Contraseña</label>
                 <input
@@ -86,6 +154,7 @@
                 </small>
             </div>
 
+            <!-- Confirmar contraseña -->
             <div class="form-group">
                 <label for="confirmar-contrasena">
                     Confirmar contraseña
@@ -102,8 +171,9 @@
                 >
             </div>
 
+            <!-- Consentimiento de privacidad -->
             <div class="form-group">
-                <label>
+                <label for="acepta-privacidad">
                     <input
                         type="checkbox"
                         id="acepta-privacidad"
@@ -115,6 +185,7 @@
                 </label>
             </div>
 
+            <!-- Botón de registro -->
             <button
                 type="submit"
                 class="btn btn-primary btn-block"
@@ -123,22 +194,25 @@
                 Crear cuenta
             </button>
 
+            <!-- Mensajes de respuesta -->
             <p
                 id="mensaje-registro"
                 class="form-message"
                 role="status"
                 aria-live="polite"
             ></p>
+
         </form>
 
         <div class="text-center">
             <p>
                 ¿Ya tienes una cuenta?
-                <a href="iniciar-sesion.html">Inicia sesión</a>
+                <a href="login.html">Inicia sesión</a>
             </p>
 
             <a href="index.html">Volver al inicio</a>
         </div>
+
     </main>
 
     <footer class="auth-footer">
